@@ -10,6 +10,11 @@ html, body {
 	font-size:11px;
 	font-family:Arial,Verdana,Tahoma,Roboto;
 }
+a{
+        color: #d6eaf8;
+        text-decoration: none;
+        font-weight: normal;
+}
 #main{
 	width:100%;height:100%;text-align:left;
 }
@@ -142,7 +147,7 @@ html, body {
 	z-index:0;
 }
 .torrent-progress-download{
-	background-color: #77bbff;
+	background-color: #1b4f72;
 }
 .torrent-progress-error{
 	background-color: #bf4040;
@@ -151,7 +156,7 @@ html, body {
 	background-color: #cc9900;
 }
 .torrent-progress-seed{
-	background-color: #008000;
+	background-color: #145a32;
 }
 .torrent-progress-stop{
 	background-color: #808080;

@@ -2,16 +2,12 @@
 <html>
 
 <head>
-	<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
-	<meta http-equiv="cache-control" content="no-cache" />
-	<meta http-equiv="expires" content="0" />
-	<meta http-equiv="pragma" content="no-cache" />
+	<meta charset="utf-8" />
 	<link rel='shortcut icon' href='favicon.ico' type='image/x-icon' />
 	<title>Transmission Web Control</title>
 	<!-- Style sheet -->
 	<link rel="stylesheet" type="text/css" href="tr-web-control/style/before-easyui.css" />
-	<link id="styleEasyui" rel="stylesheet" type="text/css"
-		href="tr-web-control/script/easyui/themes/default/easyui.css" />
+	<link id="styleEasyui" rel="stylesheet" type="text/css" href="tr-web-control/script/easyui/themes/black/easyui.css" />
 	<link rel="stylesheet" type="text/css" href="tr-web-control/script/plugins/jquery.webui-popover.css" />
 	<link rel="stylesheet" type="text/css" href="tr-web-control/style/base.css" />
 	<link rel="stylesheet" type="text/css" href="tr-web-control/script/easyui/themes/icon.css" />
@@ -51,16 +47,16 @@
 		<div id="m_top" data-options="region:'north'">
 			<div class="easyui-layout" data-options="fit:true">
 				<div id="m_title_layout" data-options="region:'center'" border="0">
-					<img id="logo" src="tr-web-control/logo.png" /><span id="m_title" style="padding:10px;display:none;"></span>
+					<img id="logo" src="tr-web-control/logo-white.png" /><span id="m_title" style="padding:10px;display:none;"></span>
 					<span id="area-update-infos" style="display:none;padding: 13px;position: absolute;background-color: #ffe48c;">
 						<span id="msg-updateInfos" style="color:#ff3232;"></span>
 						<a id="button-download-update" href="" class="easyui-linkbutton"
 							data-options="iconCls:'iconfont tr-icon-help'"><span system-lang="public['text-have-update']"></span></a>
 					</span>
 					<div style="float:right;padding:13px;">
-						<span>Theme: </span>
+						<!--span>Theme: </span-->
 						<!-- 切换主题 -->
-						<select id="select-themes" style="width:120px;height:25px"></select>
+						<!--select id="select-themes" style="width:120px;height:25px"></select-->
 						<!-- 切换到移动版 -->
 						<!--a id="toolbar_mobile" href="javascript:location.href = 'index.mobile.html';" class="easyui-linkbutton"
 							data-options="iconCls:'icon-mobile',plain:true" system-tip-lang="toolbar.tip['ui-mobile']"><span

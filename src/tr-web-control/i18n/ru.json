@@ -408,7 +408,7 @@
 			"peers-fields": {
 				"address": "IP адрес",
 				"port": "Порт",
-				"isUTP": "UTP включен",
+				"isUTP": "μTP",
 				"clientName": "Клиент",
 				"flagStr": "Флаги",
 				"progress": "Прогресс",

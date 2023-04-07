@@ -109,7 +109,7 @@
 }
 .panel-header,
 .panel-body {
-  border-color: #000;
+  border-color: #191919;
 }
 .panel-header {
   background-color: #3d3d3d;
@@ -121,7 +121,7 @@
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#454545,endColorstr=#383838,GradientType=0);
 }
 .panel-body {
-  background-color: #666;
+  background-color: #353638;
   color: #fff;
   font-size: 12px;
 }
@@ -1550,38 +1550,38 @@
   filter: none;
 }
 .tabs li.tabs-selected a.tabs-inner {
-  background-color: #666;
+  background-color: #353638;
   color: #fff;
-  background: -webkit-linear-gradient(top,#454545 0,#666 100%);
-  background: -moz-linear-gradient(top,#454545 0,#666 100%);
-  background: -o-linear-gradient(top,#454545 0,#666 100%);
-  background: linear-gradient(to bottom,#454545 0,#666 100%);
+  background: -webkit-linear-gradient(top,#454545 0,#353638 100%);
+  background: -moz-linear-gradient(top,#454545 0,#353638 100%);
+  background: -o-linear-gradient(top,#454545 0,#353638 100%);
+  background: linear-gradient(to bottom,#454545 0,#353638 100%);
   background-repeat: repeat-x;
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#454545,endColorstr=#666,GradientType=0);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#454545,endColorstr=#353638,GradientType=0);
 }
 .tabs-header-bottom .tabs li.tabs-selected a.tabs-inner {
-  background: -webkit-linear-gradient(top,#666 0,#454545 100%);
-  background: -moz-linear-gradient(top,#666 0,#454545 100%);
-  background: -o-linear-gradient(top,#666 0,#454545 100%);
-  background: linear-gradient(to bottom,#666 0,#454545 100%);
+  background: -webkit-linear-gradient(top,#353638 0,#454545 100%);
+  background: -moz-linear-gradient(top,#353638 0,#454545 100%);
+  background: -o-linear-gradient(top,#353638 0,#454545 100%);
+  background: linear-gradient(to bottom,#353638 0,#454545 100%);
   background-repeat: repeat-x;
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#666,endColorstr=#454545,GradientType=0);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#353638,endColorstr=#454545,GradientType=0);
 }
 .tabs-header-left .tabs li.tabs-selected a.tabs-inner {
-  background: -webkit-linear-gradient(left,#454545 0,#666 100%);
-  background: -moz-linear-gradient(left,#454545 0,#666 100%);
-  background: -o-linear-gradient(left,#454545 0,#666 100%);
-  background: linear-gradient(to right,#454545 0,#666 100%);
+  background: -webkit-linear-gradient(left,#454545 0,#353638 100%);
+  background: -moz-linear-gradient(left,#454545 0,#353638 100%);
+  background: -o-linear-gradient(left,#454545 0,#353638 100%);
+  background: linear-gradient(to right,#454545 0,#353638 100%);
   background-repeat: repeat-y;
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#454545,endColorstr=#666,GradientType=1);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#454545,endColorstr=#353638,GradientType=1);
 }
 .tabs-header-right .tabs li.tabs-selected a.tabs-inner {
-  background: -webkit-linear-gradient(left,#666 0,#454545 100%);
-  background: -moz-linear-gradient(left,#666 0,#454545 100%);
-  background: -o-linear-gradient(left,#666 0,#454545 100%);
-  background: linear-gradient(to right,#666 0,#454545 100%);
+  background: -webkit-linear-gradient(left,#353638 0,#454545 100%);
+  background: -moz-linear-gradient(left,#353638 0,#454545 100%);
+  background: -o-linear-gradient(left,#353638 0,#454545 100%);
+  background: linear-gradient(to right,#353638 0,#454545 100%);
   background-repeat: repeat-y;
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#666,endColorstr=#454545,GradientType=1);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#353638,endColorstr=#454545,GradientType=1);
 }
 .tabs li a.tabs-inner {
   color: #fff;
@@ -1619,16 +1619,16 @@
   background-color: #777;
 }
 .tabs li.tabs-selected a.tabs-inner {
-  border-bottom: 1px solid #666;
+  border-bottom: 1px solid #353638;
 }
 .tabs-header-bottom .tabs li.tabs-selected a.tabs-inner {
-  border-top: 1px solid #666;
+  border-top: 1px solid #353638;
 }
 .tabs-header-left .tabs li.tabs-selected a.tabs-inner {
-  border-right: 1px solid #666;
+  border-right: 1px solid #353638;
 }
 .tabs-header-right .tabs li.tabs-selected a.tabs-inner {
-  border-left: 1px solid #666;
+  border-left: 1px solid #353638;
 }
 .tabs-header .tabs-pill li.tabs-selected a.tabs-inner {
   background: #0052A3;
@@ -1724,7 +1724,7 @@
 }
 .datagrid-header-row,
 .datagrid-row {
-  height: 25px;
+  height: 22px;
 }
 .datagrid-header td,
 .datagrid-body td,
@@ -1906,7 +1906,7 @@
   border-collapse: separate;
 }
 .datagrid-row-alt {
-  background: #555;
+  /*background: #555;*/
 }
 .datagrid-row-over,
 .datagrid-header td.datagrid-header-over {
@@ -2723,7 +2723,7 @@
   border-bottom: 1px solid #777;
 }
 .menu {
-  background-color: #666;
+  background-color: #353638;
   border-color: #444;
   color: #fff;
 }

@@ -9,7 +9,7 @@ var system = {
 		autoReload: true,
 		reloadStep: 3000,
 		pageSize: 200,
-		pagination: true,
+		pagination: false,
 		pageList: [10, 20, 30, 40, 50, 100, 150, 200, 250, 300, 5000],
 		defaultSelectNode: null,
 		autoExpandAttribute: false,
@@ -176,7 +176,7 @@ var system = {
 			this.initdata();
 		}
 
-		this.initThemes();
+//		this.initThemes();
 		// 剪切板组件
 		this.clipboard = new ClipboardJS('#toolbar_copyPath');
 
@@ -210,7 +210,7 @@ var system = {
 	},
 	initdata: function () {
 		//this.panel.title.text(this.lang.system.title+" "+this.version+" ("+this.codeupdate+")");
-		$(document).attr("title", this.lang.system.title + " " + this.version);
+//		$(document).attr("title", this.lang.system.title + " " + this.version);
 
 		// 设置开关组件默认文字
 		$.fn.switchbutton.defaults.onText = this.lang["public"]["text-on"];
@@ -326,7 +326,7 @@ var system = {
 		this.connect();
 		this.initEvent();
 		// Check for updates
-		this.checkUpdate();
+//		this.checkUpdate();
 	},
 	/**
 	 * 初始化相关事件
@@ -1638,8 +1638,7 @@ var system = {
 		transmission.getSession(function (result) {
 			system.serverConfig = result;
 			// Version Information
-			$("#status_version").html("Transmission " + system.lang.statusbar.version + result["version"] + ", RPC: " + result["rpc-version"] +
-				", WEB Control: " + system.version + "(" + system.codeupdate + ")");
+			$("#status_version").html("Transmission " + system.lang.statusbar.version + result["version"] + ", RPC: " + result["rpc-version"]);
 			if (result["alt-speed-enabled"] == true) {
 				system.panel.toolbar.find("#toolbar_alt_speed").linkbutton({
 					iconCls: "iconfont tr-icon-woniu"

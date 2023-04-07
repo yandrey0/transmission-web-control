@@ -6,7 +6,7 @@ system.config = $.extend(system.config, {
 	// The default num of entries for each page
 	pageSize: 200,
 	// Enable/disable pagination for torrentlist.datagrid
-	pagination: true,
+	pagination: false,
 	// Options in torrentlist.datagrid PageList
 	pageList: [10, 20, 30, 40, 50, 100, 150, 200, 250, 300, 5000],
 	// The initial interface defaults to the selected node, the name can refer to the language package tree
@@ -18,7 +18,7 @@ system.config = $.extend(system.config, {
 	//show Folders
 	foldersShow: false,
 	// theme
-	theme: "default",
+	theme: "black;logo-white.png",
 	// 是否显示BT服务器
 	showBTServers: false,
 	// ipinfo.io token
