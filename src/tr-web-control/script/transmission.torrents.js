@@ -15,7 +15,7 @@ transmission.torrents = {
 	activeTorrentCount: 0,
 	pausedTorrentCount: 0,
 	fields: {
-		base: "id,name,status,hashString,totalSize,percentDone,addedDate,trackerStats,leftUntilDone,rateDownload,rateUpload,recheckProgress" + ",rateDownload,rateUpload,peersGettingFromUs,peersSendingToUs,uploadRatio,uploadedEver,downloadedEver,downloadDir,error,errorString,doneDate,queuePosition,activityDate",
+		base: "id,name,status,hashString,totalSize,percentDone,addedDate,trackerStats,leftUntilDone,rateDownload,rateUpload,recheckProgress" + ",rateDownload,rateUpload,peersGettingFromUs,peersSendingToUs,uploadRatio,uploadedEver,downloadedEver,downloadDir,error,errorString,doneDate,queuePosition,activityDate,file-count,dateCreated,trackerList",
 		status: "id,name,status,totalSize,percentDone,trackerStats,leftUntilDone,rateDownload,rateUpload,recheckProgress" + ",rateDownload,rateUpload,peersGettingFromUs,peersSendingToUs,uploadRatio,uploadedEver,downloadedEver,error,errorString,doneDate,queuePosition,activityDate",
 		config: "id,name,downloadLimit,downloadLimited,peer-limit,seedIdleLimit,seedIdleMode,seedRatioLimit,seedRatioMode,uploadLimit,uploadLimited"
 	},
@@ -247,13 +247,14 @@ transmission.torrents = {
 			for (var index in trackerStats) {
 				var trackerInfo = trackerStats[index];
 				var lastResult = trackerInfo.lastAnnounceResult.toLowerCase();
-				var hostName = trackerInfo.host.getHostName();
+/*				var hostName = trackerInfo.host.getHostName();
 				var trackerUrl = hostName.split(".");
 				if ($.inArray(trackerUrl[0], "www,tracker,announce".split(",")) != -1) {
 					trackerUrl.shift();
 				}
 
-				var name = trackerUrl.join(".");
+				var name = trackerUrl.join(".");*/
+				var name = trackerInfo.sitename;
 				var id = "tracker-" + name.replace(/\./g, "-");
 				var tracker = transmission.trackers[id];
 				if (!tracker) {
@@ -262,7 +263,7 @@ transmission.torrents = {
 						torrents: new Array(),
 						size: 0,
 						connected: true,
-						isBT: (trackerStats.length>5)
+						isBT: false //(trackerStats.length>5)
 					};
 					tracker = transmission.trackers[id];
 				}
@@ -291,6 +292,7 @@ transmission.torrents = {
 				if (trackers.indexOf(name)==-1) {
 					trackers.push(name);
 				}
+break;
 			}
 
 			if (trackerStats.length>5) {

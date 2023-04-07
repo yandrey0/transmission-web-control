@@ -403,7 +403,8 @@
 				"flagStr": "Flag",
 				"progress": "Progress",
 				"rateToClient": "RateToClient",
-				"rateToPeer": "RateToPeer"
+				"rateToPeer": "RateToPeer",
+				"country": "Country"
 			},
 			"status": {
 				"true": "True",

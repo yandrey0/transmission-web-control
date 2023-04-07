@@ -1,26 +1,28 @@
 {
 	"fields":[
 		{"field":"ck","checkbox":"true","allowCustom":"false"}
+		,{"field":"id","width":"30","align":"center","sortable":"true"}
 		,{"field":"name","width":"300","sortable":"true","formatter":"_usename_"}
-		,{"field":"totalSize","width":"80","align":"right","sortable":"true","formatter":"size"}
+		,{"field":"file-count","width":"30","align":"right"}
+		,{"field":"totalSize","width":"70","align":"right","sortable":"true","formatter":"size"}
 		,{"field":"percentDone","width":"70","align":"center","sortable":"true","formatter":"progress"}
-		,{"field":"remainingTime","width":"100","align":"right","sortable":true, "formatter": "remainingTime"}
+		,{"field":"remainingTime","width":"70","align":"right","sortable":true, "formatter": "remainingTime"}
+		,{"field":"rateDownload","width":"70","align":"right","sortable":"true","formatter":"speed"}
+		,{"field":"rateUpload","width":"70","align":"right","sortable":"true","formatter":"speed"}
+		,{"field":"completeSize","width":"70","align":"right","sortable":"true","formatter":"size"}
+		,{"field":"uploadedEver","width":"70","align":"right","sortable":"true","formatter":"size"}
 		,{"field":"uploadRatio","width":"60","align":"right","sortable":"true","formatter":"ratio"}
 		,{"field":"status","width":"60","align":"center","sortable":"true"}
 		,{"field":"statusCode","hidden":"true","allowCustom":"false"}
-		,{"field":"seederCount","width":"60","align":"left"}
-		,{"field":"leecherCount","width":"60","align":"left"}
-		,{"field":"rateDownload","width":"80","align":"right","sortable":"true","formatter":"speed"}
-		,{"field":"rateUpload","width":"80","align":"right","sortable":"true","formatter":"speed"}
-		,{"field":"completeSize","width":"80","align":"right","sortable":"true","formatter":"size"}
-		,{"field":"uploadedEver","width":"80","align":"right","sortable":"true","formatter":"size"}
-		,{"field":"addedDate","width":"130","align":"center","sortable":"true","formatter":"longtime"}
-		,{"field":"id","width":"30","align":"center","sortable":"true"}
+		,{"field":"seederCount","width":"50","align":"right"}
+		,{"field":"leecherCount","width":"50","align":"right"}
+		,{"field":"dateCreated","width":"120","align":"center","sortable":"true","formatter":"longtime"}
+		,{"field":"addedDate","width":"120","align":"center","sortable":"true","formatter":"longtime"}
+		,{"field":"doneDate","width":120,"align":"center","sortable":"true","formatter":"longtime"}
+		,{"field":"activityDate","width":120,"align":"center","sortable":true,"formatter":"longtime"}
 		,{"field":"queuePosition","width":"30","align":"center","sortable":true}
-		,{"field":"trackers","width":"100","align":"left","sortable":true}
-		,{"field":"downloadDir","width":200,"align":"left","sortable":true}
-		,{"field":"activityDate","width":130,"align":"center","sortable":true,"formatter":"longtime"}
-		,{"field":"labels","width":130,"align":"left", "formatter": "labels"}
-		,{"field":"doneDate","width":130,"align":"center","sortable":"true","formatter":"longtime"}
+		,{"field":"downloadDir","width":120,"align":"left","sortable":true}
+		,{"field":"labels","width":100,"align":"left", "formatter": "labels"}
+		,{"field":"trackers","width":"80","align":"left","sortable":true}
 	]
 }

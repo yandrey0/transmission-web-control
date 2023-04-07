@@ -7,13 +7,13 @@ var system = {
 	// default config, can be customized in config.js
 	config: {
 		autoReload: true,
-		reloadStep: 5000,
-		pageSize: 30,
+		reloadStep: 3000,
+		pageSize: 200,
 		pagination: true,
 		pageList: [10, 20, 30, 40, 50, 100, 150, 200, 250, 300, 5000],
 		defaultSelectNode: null,
 		autoExpandAttribute: false,
-		defaultLang: "",
+		defaultLang: "ru",
 		foldersShow: false,
 		// theme
 		theme: "default",
@@ -729,7 +729,7 @@ var system = {
 		this.control.torrentlist = $("<table/>").attr("class", "torrent-list").appendTo(this.panel.list);
 		var headContextMenu = null;
 		var selectedIndex = -1;
-		$.get(system.rootPath + "template/torrent-fields.json?time=" + (new Date()), function (data) {
+		$.get(system.rootPath + "template/torrent-fields.json", function (data) {
 			var fields = data.fields;
 			var _fields = {}
 			for (var i=0;i<fields.length;i++) {
@@ -935,7 +935,7 @@ var system = {
 		switch (type) {
 			case "torrent-list":
 				menus = new Array("start", "pause", "-", 
-										"rename", "remove", "recheck", "-", 
+										"trackers","rename", "remove", "recheck", "-", 
 										"morepeers", "changeDownloadDir", "copyPath", "-", 
 										"menu-queue-move-top", "menu-queue-move-up", "menu-queue-move-down", "menu-queue-move-bottom",
 										"magnetLink"
@@ -1122,7 +1122,7 @@ var system = {
 				disabled: rowData
 			});
 
-			$("#toolbar_rename, #toolbar_morepeers", this.panel.toolbar).linkbutton({
+			$("#toolbar_trackers, #toolbar_rename, #toolbar_morepeers", this.panel.toolbar).linkbutton({
 				disabled: true
 			});
 			this.panel.toolbar.find("#toolbar_queue").menubutton("disable");
@@ -1132,7 +1132,7 @@ var system = {
 		// 如果没有被选中的数据时
 		if (this.checkedRows.length == 0) {
 			// 禁用所有菜单
-			$("#toolbar_start, #toolbar_pause, #toolbar_rename, #toolbar_remove, #toolbar_recheck, #toolbar_changeDownloadDir,#toolbar_changeSpeedLimit,#toolbar_morepeers,#toolbar_copyPath", this.panel.toolbar).linkbutton({
+			$("#toolbar_start, #toolbar_pause, #toolbar_trackers, #toolbar_rename, #toolbar_remove, #toolbar_recheck, #toolbar_changeDownloadDir,#toolbar_changeSpeedLimit,#toolbar_morepeers,#toolbar_copyPath", this.panel.toolbar).linkbutton({
 				disabled: true
 			});
 			this.panel.toolbar.find("#toolbar_queue").menubutton("disable");
@@ -1141,7 +1141,7 @@ var system = {
 			// 当仅有一条数据被选中时
 		} else if (this.checkedRows.length == 1) {
 			// 设置 删除、改名、变更保存目录、移动队列功能可用
-			$("#toolbar_remove, #toolbar_rename, #toolbar_changeDownloadDir,#toolbar_changeSpeedLimit,#toolbar_copyPath", this.panel.toolbar).linkbutton({
+			$("#toolbar_remove, #toolbar_trackers, #toolbar_rename, #toolbar_changeDownloadDir,#toolbar_changeSpeedLimit,#toolbar_copyPath", this.panel.toolbar).linkbutton({
 				disabled: false
 			});
 			this.panel.toolbar.find("#toolbar_queue").menubutton("enable");
@@ -1183,7 +1183,7 @@ var system = {
 			$("#toolbar_start, #toolbar_pause, #toolbar_remove, #toolbar_recheck, #toolbar_changeDownloadDir,#toolbar_changeSpeedLimit,#toolbar_copyPath", this.panel.toolbar).linkbutton({
 				disabled: false
 			});
-			$("#toolbar_rename, #toolbar_morepeers", this.panel.toolbar).linkbutton({
+			$("#toolbar_trackers, #toolbar_rename, #toolbar_morepeers", this.panel.toolbar).linkbutton({
 				disabled: true
 			});
 			this.panel.toolbar.find("#toolbar_queue").menubutton("disable");
@@ -1458,6 +1458,29 @@ var system = {
 				});
 			});
 
+		// Edit trackers
+		this.panel.toolbar.find("#toolbar_trackers")
+			.linkbutton({
+				disabled: true
+			})
+			.click(function () {
+				var rows = system.control.torrentlist.datagrid("getChecked");
+				if (rows.length == 0) return;
+
+				system.openDialogFromTemplate({
+					id: "dialog-torrent-trackers",
+					options: {
+						title: "Трекеры",
+						width: 520,
+						height: 520,
+						resizable: true
+					},
+					datas: {
+						id: rows[0].id
+					}
+				});
+			});
+
 		// Modify the selected torrent data save directory
 		this.panel.toolbar.find("#toolbar_changeDownloadDir")
 			.linkbutton({
@@ -1637,14 +1660,14 @@ var system = {
 			}
 
 			// Rpc-version version 15, no longer provide download-dir-free-space parameters, to be obtained from the new method
-			if (parseInt(system.serverConfig["rpc-version"]) >= 15) {
+			/*if (parseInt(system.serverConfig["rpc-version"]) >= 15) {
 				transmission.getFreeSpace(system.downloadDir, function (datas) {
 					system.serverConfig["download-dir-free-space"] = datas.arguments["size-bytes"];
 					system.showFreeSpace(datas.arguments["size-bytes"]);
 				});
 			} else {
 				system.showFreeSpace(system.serverConfig["download-dir-free-space"]);
-			}
+			}*/
 
 			if (isinit) {
 				system.showStatus(system.lang.system.status.connected);
@@ -2739,6 +2762,7 @@ var system = {
 				case "uploadedEver":
 				case "leftUntilDone":
 				case "completeSize":
+				case "pieceSize":
 					value = formatSize(value);
 					break;
 
@@ -2850,15 +2874,19 @@ var system = {
 
 					// state
 					case "announceState":
+					case "scrapeState":
 						rowdata[key] = system.lang.torrent.attribute["servers-fields"]["announceStateText"][stats[key]];
 						break;
 					// Dates
 					case "lastAnnounceTime":
 					case "nextAnnounceTime":
+					case "lastScrapeTime":
+					case "nextScrapeTime":
 						rowdata[key] = formatLongTime(stats[key]);
 						break;
 
 						// true/false
+					case "isBackup":
 					case "lastAnnounceSucceeded":
 					case "lastAnnounceTimedOut":
 						rowdata[key] = system.lang.torrent.attribute["status"][stats[key]];
@@ -2891,60 +2919,43 @@ var system = {
 				rowdata[key] = item[key];
 			}
 
-			if (system.config.ipInfoToken !== '' || system.config.ipInfoFlagUrl !== '') {
-				let flag = '';
-				let detail = '';
+
+				let flag = {};
+
 				let ip = rowdata['address'];
 
-				if (system.config.ipInfoDetailUrl !== '') {
-					if (this.ipdetail[ip] === undefined ){
-							$.ajax({
-								type: 'GET',
-								url: this.expandIpInfoUrl(system.config.ipInfoDetailUrl, ip)
-							}).done((data) => {
-								if (data) {
-									detail = data.trim();
-									this.ipdetail[ip] = detail;
-								}
-							});
-					} else {
-						detail = this.ipdetail[ip];
-					}
-				}
 
 				if (this.flags[ip] === undefined) {
-					let url = ''
-					if (system.config.ipInfoFlagUrl !== '') {
-						url = this.expandIpInfoUrl(system.config.ipInfoFlagUrl, ip);
-					} else {
-						url = 'https://ipinfo.io/' + ip + '/country?token=' + system.config.ipInfoToken;
-					}
+
+					let url = '/ip2country.php?' + ip;
+
 					$.ajax({
 						type: "GET",
 						url: url
 					}).done((data) => {
 						if (data) {
-							flag = data.toLowerCase().trim();
+
+							geo = data.name;
+							geo += (data.city != null)  ? ' ('+data.city+')' : '';
+
+							flag = {
+								"country":	'<img src="' + this.rootPath + 'style/flags/' + data.country + '.svg" alt="' + data.country + '" class="flag">' + geo,
+								"asn":		data.asn,
+								"timezone":	data.timezone
+							};
 							this.flags[ip] = flag;
-							$("img.img_ip-"+ip.replaceAll(/[:.]+/g,'_')).attr({
-								src: this.rootPath + 'style/flags/' + flag + '.png',
-								alt: flag,
-								title: detail!==''? detail : flag
-							}).show();
 						}
 					});
+					
 				} else {
-					flag = this.flags[ip];
+			        	flag = this.flags[ip];
 				}
 
-				let img = "";
-				if (flag) {
-					img = '<img src="' + this.rootPath + 'style/flags/' + flag + '.png" alt="' + flag + '" title="' + (detail!==''? detail : flag) + '"> ';
-				} else {
-					img = '<img src="" class="img_ip-'+ip.replaceAll(/[:.]+/g,'_')+'" style="display:none;"> ';
-				}
-				rowdata['address'] = img + ip;
-			}
+
+				rowdata['country'] = flag.country;
+				rowdata['asn'] = flag.asn;
+				rowdata['timezone'] = flag.timezone;
+
 
 			// 使用同类已有的翻译文本
 			rowdata.isUTP = system.lang.torrent.attribute["status"][item.isUTP];
@@ -3458,15 +3469,15 @@ var system = {
 
 $(document).ready(function () {
 	// Loads the default language content
-	$.getJSON(system.rootPath + "i18n/en.json").done(function(result){
+	/*$.getJSON(system.rootPath + "i18n/en.json").done(function(result){
 		system.defaultLang = result;
-	});
+	});*/
 
 	// Loads a list of available languages
-	$.getJSON(system.rootPath + "i18n.json").done(function(result){
-		system.languages = result;
+//	$.getJSON(system.rootPath + "i18n.json").done(function(result){
+		system.languages = {"en": "English", "ru": "Русский (Russian)"};
 		system.init(location.search.getQueryString("lang"), location.search.getQueryString("local"));
-	});
+//	});
 });
 
 function fileFilter(dataRows, filterString) {

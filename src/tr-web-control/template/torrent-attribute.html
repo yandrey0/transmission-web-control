@@ -27,7 +27,7 @@
 					</tr>
 					<tr>
 						<td width="12%" class="title"><span id="torrent-attribute-label-totalSize"></span></td>
-						<td width="38%"><span id="torrent-attribute-value-totalSize"></span></td>
+						<td width="38%"><span id="torrent-attribute-value-totalSize"></span> (<span id="torrent-attribute-value-pieceCount"></span> x <span id="torrent-attribute-value-pieceSize"></span>)</td>
 						<td width="12%" class="title"><span id="torrent-attribute-label-addedDate"></span></td>
 						<td width="38%"><span id="torrent-attribute-value-addedDate"></span></td>
 					</tr>
@@ -236,7 +236,7 @@
 		
 		// 初始化文件显示列表
 		var filelist = $("<table/>").attr("class","torrent-list").attr("id","torrent-files-table").appendTo(thisLayout.find("#torrent-attribute-files"));
-		$.get(system.rootPath+"template/torrent-attribute-files-fields.json?time="+(new Date()),function(data){
+		$.get(system.rootPath+"template/torrent-attribute-files-fields.json",function(data){
 			var fields = data.fields;
 			var config = data.config;
 
@@ -408,7 +408,7 @@
 		
 		// 服务器列表
 		var serverlist = $("<table/>").attr("class","torrent-list").attr("id","torrent-servers-table").appendTo(thisLayout.find("#torrent-attribute-servers"));
-		$.get(system.rootPath+"template/torrent-attribute-servers-fields.json?time="+(new Date()),function(data){
+		$.get(system.rootPath+"template/torrent-attribute-servers-fields.json",function(data){
 			var fields = data.fields;
 			var config = data.config;
 			
@@ -546,7 +546,7 @@
 
 		// 用户列表
 		var peerslist = $("<table/>").attr("class","torrent-list").attr("id","torrent-peers-table").appendTo(thisLayout.find("#torrent-attribute-peers"));
-		$.get(system.rootPath+"template/torrent-attribute-users-fields.json?time="+(new Date()),function(data){
+		$.get(system.rootPath+"template/torrent-attribute-users-fields.json",function(data){
 			var fields = data.fields;
 			var config = data.config;
 			

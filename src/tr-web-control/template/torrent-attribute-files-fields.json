@@ -7,12 +7,12 @@
 	}
 	,"fields":[
 		{"field":"ck","checkbox":"true"}
-		,{"field":"name","width":"300","sortable":"true"}
+		,{"field":"name","width":"400","sortable":"true"}
 		,{"field":"length","width":"80","align":"right","sortable":"true","formatter":"size"}
-		,{"field":"percentDone","width":"70","align":"center","sortable":"true"}
+		,{"field":"percentDone","width":"210","align":"center","sortable":"true"}
 		,{"field":"bytesCompleted","width":"80","align":"right","sortable":"true","formatter":"size"}
 		,{"field":"wanted","width":"60","align":"center","sortable":"true"}
-		,{"field":"priority","width":"60","align":"left"}
+		,{"field":"priority","width":"100","align":"left"}
 		,{"field":"index","width":"130","hidden":"true"}
 	]
 }

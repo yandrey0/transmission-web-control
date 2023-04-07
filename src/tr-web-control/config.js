@@ -2,7 +2,7 @@ system.config = $.extend(system.config, {
 	// Whether to enable automatic refresh
 	autoReload: true,
 	// Automatic refresh rate (ms)
-	reloadStep: 5000,
+	reloadStep: 3000,
 	// The default num of entries for each page
 	pageSize: 200,
 	// Enable/disable pagination for torrentlist.datagrid
@@ -14,7 +14,7 @@ system.config = $.extend(system.config, {
 	// Whether the torrent details are automatically expanded
 	autoExpandAttribute: false,
 	// default language
-	defaultLang: "",
+	defaultLang: "ru",
 	//show Folders
 	foldersShow: false,
 	// theme

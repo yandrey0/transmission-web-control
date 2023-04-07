@@ -47,6 +47,7 @@
 		"ui-computer": "Стандартный UI",
 		"plugin": "Плагины",
 		"rename": "Переименовать",
+		"trackers": "Трекеры",
 		"copy-path-to-clipboard": "Скопировать путь загрузки в буфер обмена",
 		"tip": {
 			"start": "Запустить выбранные торренты",
@@ -72,6 +73,7 @@
 			"ui-original": "Оригинальный UI",
 			"more-peers": "Запросить у трекера больше пиров",
 			"rename": "Переименовать торрент",
+			"trackers": "Трекеры",
 			"copy-path-to-clipboard": "Скопировать путь загрузки в буфер обмена"
 		}
 	},
@@ -333,7 +335,7 @@
 			"id": "#",
 			"name": "Название",
 			"hashString": "Хэш",
-			"downloadDir": "Папка загрузки",
+			"downloadDir": "Путь загрузки",
 			"totalSize": "Размер",
 			"status": "Состояние",
 			"percentDone": "Готово %",
@@ -347,10 +349,12 @@
 			"uploadedEver": "Отдано",
 			"uploadRatio": "Рейтинг",
 			"queuePosition": "Очередь",
-			"activityDate": "Последняя активность",
+			"activityDate": "Активность",
 			"trackers": "Трекеры",
 			"labels": "Метки",
-			"doneDate": "Загрузка завершена"
+			"doneDate": "Завершен",
+			"file-count": "Файлов",
+			"dateCreated": "Создан"
 		},
 		"status-text": {
 			"0": "Пауза",
@@ -384,26 +388,35 @@
 				"lastAnnounceSucceeded": "Успешно",
 				"lastAnnounceTime": "Время анонса",
 				"lastAnnounceTimedOut": "Тайм-аут",
-				"downloadCount": "Количество загрузок",
+				"downloadCount": "Загрузок",
 				"nextAnnounceTime": "Следующий анонс",
-				"leecherCount": "Количество личеров",
-				"seederCount": "Количество сидеров",
+				"leecherCount": "Личеров",
+				"seederCount": "Сидеров",
 				"announceStateText": {
 					"0": "Неактивны",
 					"1": "Ожидают",
 					"2": "В очереди",
 					"3": "Активны"
-				}
+				},
+				"tier": "Tier",
+				"isBackup": "Backup",
+				"lastAnnouncePeerCount": "Пиров",
+				"scrapeState": "Scrape",
+				"lastScrapeTime": "lastScrapeTime",
+				"nextScrapeTime": "nextScrapeTime"
 			},
 			"peers-fields": {
 				"address": "IP адрес",
 				"port": "Порт",
 				"isUTP": "UTP включен",
 				"clientName": "Клиент",
-				"flagStr": "Страна",
+				"flagStr": "Флаги",
 				"progress": "Прогресс",
 				"rateToClient": "Скорость приема",
-				"rateToPeer": "Скорость отдачи"
+				"rateToPeer": "Скорость отдачи",
+				"country": "Страна",
+				"asn": "ASN",
+				"timezone": "Time Zone"
 			},
 			"status": {
 				"true": "Да",

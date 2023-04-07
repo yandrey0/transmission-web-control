@@ -6,8 +6,8 @@ var transmission = {
 	host: "",
 	port: "9091",
 	path: "/transmission/rpc",
-	rpcpath: "../rpc",
-	fullpath: "",
+	rpcpath: "/transmission/rpc",
+	fullpath: "/transmission/rpc",
 	on: {
 		torrentCountChange: null,
 		postError: null
@@ -303,6 +303,22 @@ var transmission = {
 				ids: [torrentId],
 				path: oldpath || torrent.name,
 				name: newname
+			}
+		}, function(data) {
+			if (callback)
+				callback(data);
+		});
+	},
+	trackersTorrent: function(torrentId, newtrackers, callback) {
+		var torrent = this.torrents.all[torrentId];
+		if (!torrent)
+			return false;
+
+		this.exec({
+			method: "torrent-set",
+			arguments: {
+				ids: [torrentId],
+				trackerList: newtrackers
 			}
 		}, function(data) {
 			if (callback)
