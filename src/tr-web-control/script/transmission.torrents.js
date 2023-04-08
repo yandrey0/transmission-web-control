@@ -263,7 +263,7 @@ transmission.torrents = {
 						torrents: new Array(),
 						size: 0,
 						connected: true,
-						isBT: false //(trackerStats.length>5)
+						isBT: (trackerStats.length>5)
 					};
 					tracker = transmission.trackers[id];
 				}
@@ -292,7 +292,7 @@ transmission.torrents = {
 				if (trackers.indexOf(name)==-1) {
 					trackers.push(name);
 				}
-break;
+//break;
 			}
 
 			if (trackerStats.length>5) {

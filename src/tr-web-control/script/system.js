@@ -767,7 +767,7 @@ var system = {
 			system.control.torrentlist.datagrid({
 				autoRowHeight: false,
 				pagination: system.config.pagination,
-				rownumbers: true,
+				rownumbers: false,
 				remoteSort: false,
 				checkOnSelect: false,
 				pageSize: system.config.pageSize,
@@ -3176,11 +3176,11 @@ var system = {
 					this.updateTreeNodeText(key, text);
 				}
 				parentkey = key;
-			} else {
+			} /*else {
 				this.debug("appendFolder:key", key);
 				this.debug("appendFolder:name", name);
 				this.debug("appendFolder:node", node);
-			}
+			}*/
 		}
 	},
 	replaceURI: function (text) {
