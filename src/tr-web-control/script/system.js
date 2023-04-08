@@ -2458,11 +2458,11 @@ var system = {
 				break;
 
 			case transmission._status.download:
-				className = "iconlabel icon-down";
+				className = (torrent.rateDownload != 0) ? "iconlabel icon-down-act" : "iconlabel icon-down";
 				break;
 
 			case transmission._status.seed:
-				className = "iconlabel icon-up";
+				className = (torrent.rateUpload != 0) ? "iconlabel icon-up-act" : "iconlabel icon-up";
 				break;
 
 			case transmission._status.seedwait:
@@ -2938,7 +2938,7 @@ var system = {
 							geo += (data.city != null)  ? ' ('+data.city+')' : '';
 
 							flag = {
-								"country":	'<img src="' + this.rootPath + 'style/flags/' + data.country + '.svg" alt="' + data.country + '" class="flag">' + geo,
+								"country":	'<span class="fi fi-' + data.country + '">' + geo + '</span>',
 								"asn":		data.asn,
 								"timezone":	data.timezone
 							};
