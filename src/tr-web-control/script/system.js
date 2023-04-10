@@ -16,7 +16,7 @@ var system = {
 		defaultLang: "ru",
 		foldersShow: false,
 		// theme
-		theme: "default",
+		theme: "black;logo-white.png",
 		// 是否显示BT服务器
 		showBTServers: false,
 		// ipinfo.io token
@@ -59,7 +59,6 @@ var system = {
 	dictionary: {
 		folders: null
 	},
-	checkUpdateScript: "https://api.github.com/repos/ronggang/transmission-web-control/releases/latest",
 	contextMenus: {},
 	panel: null,
 	lang: null,
@@ -101,32 +100,14 @@ var system = {
 		if (!lang) {
 			if (this.config.defaultLang)
 				lang = this.config.defaultLang;
-			else
-				lang = navigator.language || navigator.browserLanguage;
-			//this.debug("lang",lang);
 		}
-		if (!lang) lang = "zh-CN";
-
-		// If - contains the language code, you need to turn the second half to uppercase
-		if (lang.indexOf("-") != -1) {
-			// Because Linux file size restrictions
-			lang = lang.split("-")[0].toLocaleLowerCase() + "-" + lang.split("-")[1].toLocaleUpperCase();
-		}
-
-		// If the language pack is not defined, English is used
-		if (!this.languages[lang]) {
-			lang = "en";
-		}
-
-		// 统一使用 _ 替代 -
-		lang = lang.replace("-", "_");
 
 		$.getJSON(system.rootPath + "i18n/" + lang + ".json", function (result) {
 			if (result) {
 				system.lang = $.extend(true, system.defaultLang, result);
 			}
 			
-			system.resetLangText();
+			//system.resetLangText();
 			// Set the easyui language
 			$.getScript(system.rootPath + "script/easyui/locale/easyui-lang-" + lang + ".js")
 				.done(function (script, textStatus) {
@@ -176,7 +157,6 @@ var system = {
 			this.initdata();
 		}
 
-//		this.initThemes();
 		// 剪切板组件
 		this.clipboard = new ClipboardJS('#toolbar_copyPath');
 
@@ -325,8 +305,6 @@ var system = {
 		this.initTorrentTable();
 		this.connect();
 		this.initEvent();
-		// Check for updates
-//		this.checkUpdate();
 	},
 	/**
 	 * 初始化相关事件
@@ -3229,43 +3207,6 @@ var system = {
 			alert(system.lang["public"]["text-browsers-not-support-features"]);
 		}
 	},
-	checkUpdate: function () {
-		$.ajax({
-			url: this.checkUpdateScript,
-			dataType: "json",
-			success: function (result) {
-				if (result && result.tag_name) {
-					var update = result.created_at.substr(0,10).replace(/-/g,"");
-					var version = result.tag_name;
-					if ($.inArray(version, system.config.ignoreVersion)!=-1) {
-						return;
-					}
-					if (system.codeupdate < update) {
-						$("#area-update-infos").show();
-						$("#msg-updateInfos").html(update + " -> " + result.name);
-						var content = $("<div/>");
-						var html = result.body.replace(/\r\n/g,"<br/>");
-
-						var toolbar = $("<div style='text-align:right;'/>").appendTo(content);
-						$('<a href="https://github.com/ronggang/transmission-web-control/releases/latest" target="_blank" class="easyui-linkbutton" data-options="iconCls:\'iconfont tr-icon-github\'"/>').html(result.name + " ("+update+")").appendTo(toolbar).linkbutton();
-						$("<span/>").html(" ").appendTo(toolbar);
-						$('<a href="https://github.com/ronggang/transmission-web-control/wiki" target="_blank" class="easyui-linkbutton" data-options="iconCls:\'iconfont tr-icon-help\'"/>').html(system.lang["public"]["text-how-to-update"]).appendTo(toolbar).linkbutton();
-						$("<span/>").html(" ").appendTo(toolbar);
-						$('<button onclick="javascript:system.addIgnoreVersion(\''+version+'\');" class="easyui-linkbutton" data-options="iconCls:\'iconfont tr-icon-cancel-checked\'"/>').html(system.lang["public"]["text-ignore-this-version"]).appendTo(toolbar).linkbutton();
-						$("<hr/>").appendTo(content);
-						$("<div/>").html(html).appendTo(content);
-
-						$('#button-download-update').webuiPopover({
-							content: content.html(),
-							backdrop: true
-						});
-					} else {
-						$("#area-update-infos").hide();
-					}
-				}
-			}
-		});
-	},
 	addIgnoreVersion: function(version) {
 		if ($.inArray(version, system.config.ignoreVersion)==-1) {
 			this.config.ignoreVersion.push(version);
@@ -3404,31 +3345,6 @@ var system = {
 			if (window.console.log) {
 				window.console.log(label, text);
 			}
-		}
-	},
-	/**
-	 * 初始化主题
-	 */
-	initThemes: function () {
-		if (this.themes) {
-			$('#select-themes').combobox({
-				groupField: 'group',
-				data: this.themes,
-				editable: false,
-				panelHeight: 'auto',
-				onChange: function (value) {
-					var values = (value + ";").split(";");
-					var theme = values[0];
-					var logo = values[1] || "logo.png";
-					$("#styleEasyui").attr('href', 'tr-web-control/script/easyui/themes/' + theme + '/easyui.css');
-					$("#logo").attr("src", "tr-web-control/" + logo);
-					system.config.theme = value;
-					system.saveConfig();
-				},
-				onLoadSuccess: function () {
-					$(this).combobox('setValue', system.config.theme || "default");
-				}
-			});
 		}
 	},
 	/**
