@@ -107,7 +107,7 @@ var system = {
 				system.lang = $.extend(true, system.defaultLang, result);
 			}
 			
-			//system.resetLangText();
+			system.resetLangText();
 			// Set the easyui language
 			$.getScript(system.rootPath + "script/easyui/locale/easyui-lang-" + lang + ".js")
 				.done(function (script, textStatus) {
