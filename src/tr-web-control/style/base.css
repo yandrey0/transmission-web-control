@@ -192,7 +192,9 @@ a{
 .icon-up-act{
 	background:url('images/up-act.png') no-repeat;
 }
-
+.icon-wait{
+        background:url('images/wait.png') no-repeat;
+}
 .icon-down-act{
 	background:url('images/down-act.png') no-repeat;
 }
@@ -314,6 +316,22 @@ a{
 }
 .icon-trackers{
 	background:url('images/tracker-edit.png') no-repeat;
+}
+
+.icon-blank{
+	background:url('images/blank.gif') no-repeat center center;
+}
+
+.icon-save{
+	background:url('images/filesave.png') no-repeat center center;
+}
+
+.icon-ok{
+	background:url('images/ok.png') no-repeat center center;
+}
+
+.icon-cancel{
+	background:url('images/cancel.png') no-repeat center center;
 }
 
 .drop-over-before{

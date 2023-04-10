@@ -1720,13 +1720,6 @@ var system = {
 		this.resetNavFolders(oldInfos);
 		this.resetNavLabels();
 
-		// FF browser displays the total size, will be moved down a row, so a separate treatment
-		// 新版本已无此问题
-		if ($.ua.browser.name == "Firefox" && $.ua.browser.major < 60) {
-			system.panel.left.find("span.nav-total-size").css({
-				"margin-top": "-19px"
-			});
-		}
 	},
 	/**
 	 * 重置导航栏种子状态信息
@@ -2758,6 +2751,7 @@ var system = {
 
 					// Size
 				case "totalSize":
+				case "downloadedEver":
 				case "uploadedEver":
 				case "leftUntilDone":
 				case "completeSize":
@@ -2797,6 +2791,10 @@ var system = {
 					// description
 				case "comment":
 					value = system.replaceURI(value);
+					break;
+
+				case "isPrivate":
+					value = (value==true?"Private":"");
 					break;
 
 			}
@@ -3054,11 +3052,7 @@ var system = {
 					break;
 				case "ratio":
 					field.formatter = function (value, row, index) {
-						var className = '';
-						if (parseFloat(value) < 1 && value!=-1) {
-							className = 'text-status-warning';
-						}
-						return '<span class="' + className + '">' + (value==-1?"∞":value) + '</span>';
+						return (value==-1?"∞":value);
 					};
 					break;
 
@@ -3120,13 +3114,6 @@ var system = {
 		}
 
 		timedChunk(transmission.downloadDirs, this.appendFolder, this, 10, function () {
-			// FF browser displays the total size, will be moved down a row, so a separate treatment
-			// 新版本已无此问题
-			if ($.ua.browser.name == "Firefox" && $.ua.browser.major < 60) {
-				system.panel.left.find("span.nav-total-size").css({
-					"margin-top": "-19px"
-				});
-			}
 
 			system.initUIStatus();
 		});

@@ -17,7 +17,7 @@
 					</tr>
 					<tr>
 						<td class="title"><span id="torrent-attribute-label-status"></span></td>
-						<td><span id="torrent-attribute-value-status"></span></td>
+						<td><span id="torrent-attribute-value-status"></span> <span id="torrent-attribute-value-isPrivate"></span></td>
 						<td class="title"><span id="torrent-attribute-label-hashString"></span></td>
 						<td><span id="torrent-attribute-value-hashString"></span></td>
 					</tr>
@@ -35,7 +35,7 @@
 						<td class="title"><span id="torrent-attribute-label-leftUntilDone"></span></td>
 						<td><span id="torrent-attribute-value-leftUntilDone"></span> (<span id="torrent-attribute-value-remainingTime"></span>)</td>
 						<td class="title"><span id="torrent-attribute-label-completeSize"></span></td>
-						<td><span id="torrent-attribute-value-completeSize"></span></td>
+						<td><span id="torrent-attribute-value-completeSize"></span> (<span id="torrent-attribute-value-downloadedEver"></span>)</td>
 					</tr>
 					<tr>
 						<td class="title"><span id="torrent-attribute-label-rateDownload"></span></td>
@@ -66,8 +66,7 @@
 						<td colspan="3"><span id="torrent-attribute-value-comment"></span></td>
 					</tr>
 					<tr>
-						<td colspan="4">
-							<hr/>
+						<td colspan="4" style="padding-top:8px">
 							<div id="torrent-attribute-pieces">
 								<i style="filter:saturate(0)" title="100MB x 0%"></i><i  style="filter:saturate(0.5)" title="100MB x 50%"></i><br/>
 								<i style="filter:saturate(1)" title="100MB x 100%"></i>
@@ -146,8 +145,7 @@
 		thisLayout.find("#torrent-attribute-config-saved").html(system.lang["public"]["text-saved"]);
 
 		thisLayout.find(".title").css({
-			// background:"#e6e6e6"
-			"border-bottom": "1px solid #ccc"
+			"border-bottom": "1px solid #696969"
 		});
 
 		var tabs = thisLayout.find("#torrent-attribute-tabs");

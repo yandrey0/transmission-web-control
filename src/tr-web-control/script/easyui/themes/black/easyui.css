@@ -3296,6 +3296,13 @@
   height: 1px;
   left: -999px;
 }
+.nav-total-size{
+	float:right;padding-right:2px;
+}
+
+.nav-torrents-number{
+	padding-top:2px;
+}
 .nav-torrents-number, .nav-total-size {
   color: #c0c0c0 !important;
 }
