@@ -1997,7 +1997,7 @@ var system = {
 			result = " <span class='nav-torrents-number'>(" + count + ")</span>";
 		}
 		if (size > 0) {
-			result += "<span class='nav-total-size'>[" + formatSize(size) + "]</span>";
+			result += "<span class='nav-total-size'>" + formatSize(size) + "</span>";
 		}
 
 		return result;
