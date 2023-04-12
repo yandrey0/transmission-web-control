@@ -227,12 +227,7 @@
 			"import-config": "Импорт настроек из файла",
 			"export-config": "Экспорт текущих настроек ",
 			"import-config-confirm": "Вы действительно хотите импортировать настройки? Данное действие перезапишет текущие настройки.",
-			"script-torrent-done-enabled": "Выполнить скрипт после завершения загрузки торрента:",
-			"ipinfo": "Маркер доступа IPinfo.io (IPinfo.io access token):",
-			"ipInfoCustom": "Дополнительные настройки службы IP-запросов. Можно использовать пользовательский URL-адрес, подходящий для запросов местных служб",
-			"ipInfoCustomTips": "Доступные переменные: <b>%ip</b>: peer IP (Обязательно), <b>%lang</b>: код языка используемый Transmission WEB control<br/>&nbsp;&nbsp;<b>%host</b>: хост (host), <b>%hostname</b>: имя хост-системы (hostname), <b>%protocol</b>: протокол, <b>%navlang</b>: код языка навигации",
-			"ipInfoCountryCodeUrl": "URL для получения сода страны:",
-			"ipInfoDetailUrl": "URL для получения подробной информации:"
+			"script-torrent-done-enabled": "Выполнить скрипт после завершения загрузки торрента:"
 		},
 		"public": {
 			"button-ok": "OK",

@@ -10,7 +10,7 @@ system.config = $.extend(system.config, {
 	// Options in torrentlist.datagrid PageList
 	pageList: [10, 20, 30, 40, 50, 100, 150, 200, 250, 300, 5000],
 	// The initial interface defaults to the selected node, the name can refer to the language package tree
-	defaultSelectNode: "actively",
+	defaultSelectNode: "torrent-all",
 	// Whether the torrent details are automatically expanded
 	autoExpandAttribute: false,
 	// default language
@@ -20,12 +20,6 @@ system.config = $.extend(system.config, {
 	// theme
 	theme: "black;logo-white.png",
 	// 是否显示BT服务器
-	showBTServers: false,
-	// ipinfo.io token
-	ipInfoToken: '',
-	// custom ip information server url
-	ipInfoFlagUrl: '',
-	ipInfoDetailUrl: ''
-
+	showBTServers: false
 });
 

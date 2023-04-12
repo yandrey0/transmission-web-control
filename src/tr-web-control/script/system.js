@@ -19,10 +19,6 @@ var system = {
 		theme: "black;logo-white.png",
 		// 是否显示BT服务器
 		showBTServers: false,
-		// ipinfo.io token
-		ipInfoToken: '',
-		ipInfoFlagUrl: '',
-		ipInfoDetailUrl: '',
 		ui: {
 			status: {
 				tree: {},
@@ -43,7 +39,6 @@ var system = {
 		nav: {
 			servers: true,
 			folders: true,
-			statistics: true,
 			labels: false
 		},
 		labels: [],
@@ -301,7 +296,6 @@ var system = {
 		this.panel.toolbar.attr("class", "panel-header");
 		this.initTree();
 		this.initToolbar();
-		this.initStatusBar();
 		this.initTorrentTable();
 		this.connect();
 		this.initEvent();
@@ -418,10 +412,6 @@ var system = {
 				} else {
 					this.config.foldersShow = true;
 				}
-				break;
-
-			case "tree-toolbar-nav-statistics":
-				treenode = this.panel.left.tree("find", "statistics");
 				break;
 
 			case "torrent-head-buttons-autoExpandAttribute":
@@ -542,63 +532,6 @@ var system = {
 					iconCls: "tree-loading"
 				}]
 			}, 
-			"statistics": {
-				id: "statistics",
-				text: this.lang.tree.statistics.title,
-				state: "closed",
-				iconCls: "iconfont tr-icon-shuju",
-				children: [{
-					id: "cumulative-stats",
-					text: this.lang.tree.statistics.cumulative,
-					iconCls: "iconfont tr-icon-folder",
-					children: [{
-						id: "uploadedBytes",
-						text: this.lang.tree.statistics.uploadedBytes,
-						iconCls: "iconfont tr-icon-empty"
-					}, {
-						id: "downloadedBytes",
-						text: this.lang.tree.statistics.downloadedBytes,
-						iconCls: "iconfont tr-icon-empty"
-					}, {
-						id: "filesAdded",
-						text: this.lang.tree.statistics.filesAdded,
-						iconCls: "iconfont tr-icon-empty"
-					}, {
-						id: "sessionCount",
-						text: this.lang.tree.statistics.sessionCount,
-						iconCls: "iconfont tr-icon-empty"
-					}, {
-						id: "secondsActive",
-						text: this.lang.tree.statistics.secondsActive,
-						iconCls: "iconfont tr-icon-empty"
-					}]
-				}, {
-					id: "current-stats",
-					text: this.lang.tree.statistics.current,
-					iconCls: "iconfont tr-icon-folder",
-					children: [{
-						id: "current-uploadedBytes",
-						text: this.lang.tree.statistics.uploadedBytes,
-						iconCls: "iconfont tr-icon-empty"
-					}, {
-						id: "current-downloadedBytes",
-						text: this.lang.tree.statistics.downloadedBytes,
-						iconCls: "iconfont tr-icon-empty"
-					}, {
-						id: "current-filesAdded",
-						text: this.lang.tree.statistics.filesAdded,
-						iconCls: "iconfont tr-icon-empty"
-					}, {
-						id: "current-sessionCount",
-						text: this.lang.tree.statistics.sessionCount,
-						iconCls: "iconfont tr-icon-empty"
-					}, {
-						id: "current-secondsActive",
-						text: this.lang.tree.statistics.secondsActive,
-						iconCls: "iconfont tr-icon-empty"
-					}]
-				}]
-			},
 			"labels": {
 				id: "labels",
 				text: this.lang.tree.labels,
@@ -1586,11 +1519,6 @@ var system = {
 			.linkbutton()
 			.attr("title", this.lang.toolbar.tip["copy-path-to-clipboard"]);
 	},
-	// Initialize the status bar
-	initStatusBar: function () {
-		this.panel.statusbar.find("#status_title_downloadspeed").html(this.lang.statusbar.downloadspeed);
-		this.panel.statusbar.find("#status_title_uploadspeed").html(this.lang.statusbar.uploadspeed);
-	},
 	// connect to the server
 	connect: function () {
 		this.showStatus(this.lang.system.status.connect, 0);
@@ -1694,7 +1622,6 @@ var system = {
 	resetTorrentInfos: function (oldInfos) {
 		this.resetNavTorrentStatus();
 		this.resetNavServers(oldInfos);
-		this.resetNavStatistics();
 		this.resetNavFolders(oldInfos);
 		this.resetNavLabels();
 
@@ -1896,37 +1823,6 @@ var system = {
 		}
 	},
 	/**
-	 * 重置导航栏数据统计信息
-	 */
-	resetNavStatistics: function() {
-		if (!this.config.nav.statistics) {
-			var node = this.panel.left.tree("find", "statistics");
-			if (node) {
-				this.panel.left.tree("remove", node.target);
-			}
-			return;
-		}
-		// Statistics
-		var items = ("uploadedBytes,downloadedBytes,filesAdded,sessionCount,secondsActive").split(",");
-		$.each(items, function (key, item) {
-			switch (item) {
-				case "uploadedBytes":
-				case "downloadedBytes":
-					system.updateTreeNodeText(item, system.lang.tree.statistics[item] + " " + formatSize(system.serverSessionStats["cumulative-stats"][item]));
-					system.updateTreeNodeText("current-" + item, system.lang.tree.statistics[item] + " " + formatSize(system.serverSessionStats["current-stats"][item]));
-					break;
-				case "secondsActive":
-					system.updateTreeNodeText(item, system.lang.tree.statistics[item] + " " + getTotalTime(system.serverSessionStats["cumulative-stats"][item] * 1000));
-					system.updateTreeNodeText("current-" + item, system.lang.tree.statistics[item] + " " + getTotalTime(system.serverSessionStats["current-stats"][item] * 1000));
-					break;
-				default:
-					system.updateTreeNodeText(item, system.lang.tree.statistics[item] + " " + system.serverSessionStats["cumulative-stats"][item]);
-					system.updateTreeNodeText("current-" + item, system.lang.tree.statistics[item] + " " + system.serverSessionStats["current-stats"][item]);
-					break;
-			}
-		});
-	},
-	/**
 	 * 重置导航栏数据目录信息
 	 */
 	resetNavFolders: function(oldInfos) {
@@ -2013,8 +1909,12 @@ var system = {
 			//system.updateTreeNodeText("torrent-all",system.lang.tree.all+" ("+data["torrentCount"]+")");
 			//system.updateTreeNodeText("paused",system.lang.tree.paused+(data["pausedTorrentCount"]==0?"":" ("+data["pausedTorrentCount"]+")"));
 			//system.updateTreeNodeText("sending",system.lang.tree.sending+(data["activeTorrentCount"]==0?"":" ("+data["activeTorrentCount"]+")"));
-			$("#status_downloadspeed").html(formatSize(data["downloadSpeed"], false, "speed"));
-			$("#status_uploadspeed").html(formatSize(data["uploadSpeed"], false, "speed"));
+			$("#status_downloadspeed").text(formatSize(data["downloadSpeed"], false, "speed"));
+			$("#status_uploadspeed").text(formatSize(data["uploadSpeed"], false, "speed"));
+
+			$("#status_download").text(formatSize(data["current-stats"]["downloadedBytes"]) + " (" + formatSize(data["cumulative-stats"]["downloadedBytes"]) + ")");
+			$("#status_upload").text(formatSize(data["current-stats"]["uploadedBytes"]) + " (" + formatSize(data["cumulative-stats"]["uploadedBytes"]) + ")");
+
 			system.serverSessionStats = data;
 			if (data["torrentCount"] == 0) {
 				var serversNode = system.panel.left.tree("find", "servers");
@@ -3354,18 +3254,6 @@ var system = {
 		if (!text) return "";
 		var _key = this.B64.encode(text);
 		return _key.replace(/[+|\/|=]/g,"0");
-	},
-
-	expandIpInfoUrl: function (url, ip) {
-		if (url=='' || url==undefined) {
-			return '';
-		}
-		return url.replace("%ip", ip)
-				  .replace("%lang", system.lang.name)
-				  .replace("%hostname", document.location.hostname)
-				  .replace("%host", document.location.host)
-				  .replace("%protocol", document.location.protocol)
-				  .replace("%navlang", navigator.language);
 	}
 };
 
