@@ -2536,6 +2536,8 @@ var system = {
 					return;
 				}
 
+				$("#m_body .layout-panel-south .panel-title").text(torrent.name);
+
 				torrent.completeSize = (torrent.totalSize - torrent.leftUntilDone);
 				if (("files" in torrent) && torrent.files.length > 0) {
 					torrent.moreInfosTag = true;
@@ -2555,6 +2557,7 @@ var system = {
 		system.panel.attribute.find("#torrent-servers-table").datagrid("loadData", []);
 		system.panel.attribute.find("#torrent-peers-table").datagrid("loadData", []);
 		system.panel.attribute.find("span[id*='torrent-attribute-value']").html("");
+		$("#m_body .layout-panel-south .panel-title").text(system.lang.title.attribute);
 	},
 	// Updates the specified current page count
 	updateCurrentPageDatas: function (keyField, datas, sourceTable) {
