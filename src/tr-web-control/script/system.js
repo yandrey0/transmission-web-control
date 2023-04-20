@@ -2785,6 +2785,29 @@ var system = {
 		//console.log("datas:",datas);
 		//system.panel.attribute.find("#torrent-servers-table").datagrid({loadFilter:pagerFilter,pageNumber:1}).datagrid("loadData",datas);
 	},
+	peerStatusTitle: function (flag_string) {
+
+	    const texts = Object.seal({
+	      '?': "We unchoked this peer, but they're not interested",
+	      D: 'Downloading from this peer',
+	      E: 'Encrypted Connection',
+	      H: 'Peer was discovered through Distributed Hash Table (DHT)',
+	      I: 'Peer is an incoming connection',
+	      K: "Peer has unchoked us, but we're not interested",
+	      O: 'Optimistic unchoke',
+	      T: 'Peer is connected via uTP',
+	      U: 'Uploading to peer',
+	      X: 'Peer was discovered through Peer Exchange (PEX)',
+	      d: "We would download from this peer if they'd let us",
+	      u: "We would upload to this peer if they'd ask",
+	    });
+
+	    return [...flag_string]
+	      .filter((ch) => texts[ch])
+	      .map((ch) => `${ch}: ${texts[ch]}`)
+	      .join('\n');
+
+	},
 	// Fill the torrent user list
 	fillTorrentPeersList: function (torrent) {
 		var peers = torrent.peers;
@@ -2838,7 +2861,8 @@ var system = {
 			// 使用同类已有的翻译文本
 			rowdata.isUTP = system.lang.torrent.attribute["status"][item.isUTP];
 			var percentDone = parseFloat(item.progress * 100).toFixed(2);
-			rowdata.progress = system.getTorrentProgressBar(percentDone, transmission._status.download)
+			rowdata.progress = system.getTorrentProgressBar(percentDone, transmission._status.download);
+			rowdata.flagStr = '<span class="ps ps-' + item.isEncrypted + '" title="' + system.peerStatusTitle(item.flagStr) + '">' + item.flagStr + '</span>';
 			datas.push(rowdata);
 		}
 

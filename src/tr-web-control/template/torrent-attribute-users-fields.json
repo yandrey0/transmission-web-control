@@ -11,7 +11,7 @@
 		,{"field":"port","width":"50","align":"right"}
 		,{"field":"isUTP","width":"60","align":"center"}
 		,{"field":"clientName","width":"160"}
-		,{"field":"flagStr","width":"60"}
+		,{"field":"flagStr","width":"70"}
 		,{"field":"progress","width":"120","align":"center"}
 		,{"field":"rateToClient","width":"80","align":"right","formatter":"speed"}
 		,{"field":"rateToPeer","width":"80","align":"right","formatter":"speed"}

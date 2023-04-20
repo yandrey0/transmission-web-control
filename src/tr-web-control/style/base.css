@@ -677,3 +677,11 @@ a{
 .fi-zm {background-image: url( "flags/zm.svg" ); }
 .fi-zw {background-image: url( "flags/zw.svg" ); }
 
+.ps{
+	display:inline-block;
+	width:auto;height:16px;padding-left:20px;
+	background-repeat: no-repeat;
+	background-position: left center;
+}
+
+.ps-true {background-image: url( "images/encrypted.png" ); }
